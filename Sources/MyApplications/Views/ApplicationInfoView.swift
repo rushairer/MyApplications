@@ -91,9 +91,3 @@ public struct ApplicationInfoView: View {
         }
     }
 }
-
-struct ApplicationInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        ApplicationInfoView()
-    }
-}

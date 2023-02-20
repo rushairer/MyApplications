@@ -10,6 +10,9 @@ import SwiftUI
 struct ApplicationInfoCellView: View {
     @Binding var appIdentifier: String?
     let applicationInfo: LookUpResponseResult.Result
+    
+    @State private var isExpanded: Bool = false
+    
     var body: some View {
         HStack(alignment: .top, spacing: 16) {
             if let iconURLString = applicationInfo.artworkUrl100,
@@ -32,13 +35,18 @@ struct ApplicationInfoCellView: View {
                         .lineLimit(1)
                 }
                 if let description = applicationInfo.description {
-                    DisclosureGroup {
+                    DisclosureGroup(isExpanded: $isExpanded) {
                         Text(description)
+                            .multilineTextAlignment(.leading)
+                            .font(.caption)
                             .foregroundColor(.secondary)
                     } label: {
-                        Text(description)
-                            .lineLimit(2)
-                            .foregroundColor(.secondary)
+                        if !isExpanded {
+                            Text(description)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(2)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
             }
